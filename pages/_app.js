@@ -20,6 +20,7 @@ function MyApp({ Component, pageProps }) {
       return {
         href,
         label: path.charAt(0).toUpperCase() + path.slice(1),
+        isCurrent: index === pathArray.length - 1,
       };
     });
 
@@ -29,10 +30,16 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Breadcrumb>
-        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem isCurrent={router.pathname === "/"} href="/">
+          Home
+        </BreadcrumbItem>
         {breadcrumbs &&
           breadcrumbs.map((breadcrumb) => (
-            <BreadcrumbItem key={breadcrumb.href} href={breadcrumb.href}>
+            <BreadcrumbItem
+              key={breadcrumb.href}
+              href={breadcrumb.href}
+              isCurrent={breadcrumb.isCurrent}
+            >
               {breadcrumb.label}
             </BreadcrumbItem>
           ))}
